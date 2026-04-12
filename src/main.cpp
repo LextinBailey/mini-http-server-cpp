@@ -24,5 +24,19 @@ int main() {
         return 1;
     }
 
+    if (listen(server_fd, SOMAXCONN) < 0) {
+        std::cerr << "listen() failed.";
+        return 1;
+    }
+
+    int client_fd = accept(server_fd, nullptr, nullptr);
+
+    if (client_fd < 0) {
+        std::cerr << "accept() failed.";
+        return 1;
+    }
+
+    std::cout << "Client connected\n";
+
     return 0;
 }
