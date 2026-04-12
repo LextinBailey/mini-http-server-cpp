@@ -36,7 +36,9 @@ int main() {
         return 1;
     }
 
-    std::cout << "Client connected\n";
+    char buffer[1024] = {0};
+    read(client_fd, buffer, 1024);
+    std::cout << buffer << '\n';
 
     return 0;
 }

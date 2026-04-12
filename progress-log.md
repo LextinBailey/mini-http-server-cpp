@@ -2,7 +2,7 @@
 
 A day-by-day log of development decisions, features, and design evolution.
 
-## Day 1 (Apr 12, 2026): GitHub Repo, Initial Structure, Socket Creation, Bind to Port, Listen, Accept
+## Day 1 (Apr 12, 2026): GitHub Repo, Initial Structure, Socket Creation, Bind to Port, Listen, Accept, Read and Print
 
 - Created GitHub repository
 - Setup project structure
@@ -12,3 +12,5 @@ A day-by-day log of development decisions, features, and design evolution.
     - bind
     - listen
     - accept connection
+- Read raw HTTP request bytes
+- Print them to the terminal
