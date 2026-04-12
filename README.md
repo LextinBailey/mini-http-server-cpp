@@ -13,10 +13,10 @@ A mini HTTP server built from scratch using C++ and low-level sockets.
 
 ```
 mini-http-server-cpp/
-├──CMakeLists.txt
+├── CMakeLists.txt
 ├── examples/
 ├── include/
-├──src/
+├── src/
 │   └── main.cpp
 ├── progress-log.md
 └── README.md
