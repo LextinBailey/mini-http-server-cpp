@@ -10,6 +10,8 @@ A mini HTTP server built from scratch using C++ and low-level sockets.
 - [x] Parse basic HTTP requests
 - [x] Return simple HTTP responses
 - [x] Handles routes
+- [x] Handle multiple requests
+- [x] Basic multithreading
 
 ### 👨‍💻 Developer Experience
 
@@ -17,9 +19,9 @@ A mini HTTP server built from scratch using C++ and low-level sockets.
 
 ### 🧱 Planned
 
-- [ ] Handle multiple requests
 - [ ] Basic routing system (`/users`, `/about`)
 - [ ] Serve static files
+- [ ] Logging requests
 
 ## ⚙️ How It Works Internally
 
@@ -70,6 +72,22 @@ Find the path in the data and respond accordingly.
 - `200 OK`: Accepted route
 - `404 Not Found`: Route does not exist
 
+### 8. Multithreading
+
+When a client connects:
+- `accept()` returns `client_fd`
+- Client handed off to a thread that calls `handle_client`
+- Main thread accepts more clients
+
+detach() lets the thread run independently.
+
+🔄 Tradeoffs of thread-per-connection:
+- ✅ Benefits:
+    - Simple
+    - Non-blocking
+- ❌ Downsides:
+    - No control over lifetime
+    - Potential resource exhaustion
 
 ## 📁 Project Structure
 
