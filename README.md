@@ -7,6 +7,9 @@ A mini HTTP server built from scratch using C++ and low-level sockets.
 ### 🛠️ Core Features
 
 - [x] Accept TCP connections
+- [x] Parse basic HTTP requests
+- [x] Return simple HTTP responses
+- [x] Handles routes
 
 ### 👨‍💻 Developer Experience
 
@@ -14,9 +17,9 @@ A mini HTTP server built from scratch using C++ and low-level sockets.
 
 ### 🧱 Planned
 
-- [ ] Parse basic HTTP requests
-- [ ] Return simple HTTP responses
-- [ ] Handle routes
+- [ ] Handle multiple requests
+- [ ] Basic routing system (`/users`, `/about`)
+- [ ] Serve static files
 
 ## ⚙️ How It Works Internally
 
@@ -42,17 +45,30 @@ Used `sockaddr_in` to configure an IP address and a port to bind to the socket.
 
 `bind()` assigned the IP address and port to the socket, so the OS knows where to direct incoming connections.
 
-### 4. Wait for Incoming Connections
+### 4. Listen for Incoming Connections
 
 `listen()` allowed the socket to accept incoming connection requests and queue them.
 
 Currently uses the system's maximum queue size.
 
-### 5. Connect Clients
+### 5. Accepting Clients
 
 `accept()` blocks until a connection request arrives.
 
 Once a client connects, it returns a file descriptor for the client connection.
+
+### 6. Read and Store Data
+
+Read the data sent from the client.
+
+Store the data in a buffer.
+
+### 7. Routing
+
+Find the path in the data and respond accordingly.
+
+- 200 OK: Accepted route
+- 404 Not Found: Route does not exist
 
 
 ## 📁 Project Structure

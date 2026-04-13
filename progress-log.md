@@ -15,6 +15,11 @@ A day-by-day log of development decisions, features, and design evolution.
 - Read raw HTTP request bytes
 - Print them to the terminal
 
-## Day 2 (Apr 13, 2026):
+## Day 2 (Apr 13, 2026): Respond, Parsing, Routing, Status Code
 
 - Updated `README.md`
+- Responded with a simple message: "Hello, World!"
+- Parses the HTTP request
+- Finds the path
+- Sends different bodies based on the path
+- Sends appropriate status code
