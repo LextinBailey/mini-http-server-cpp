@@ -47,7 +47,7 @@ Used `sockaddr_in` to configure an IP address and a port to bind to the socket.
 
 ### 4. Listen for Incoming Connections
 
-`listen()` allowed the socket to accept incoming connection requests and queue them.
+`listen()` allows the socket to accept incoming connection requests and queue them.
 
 Currently uses the system's maximum queue size.
 
@@ -67,8 +67,8 @@ Store the data in a buffer.
 
 Find the path in the data and respond accordingly.
 
-- 200 OK: Accepted route
-- 404 Not Found: Route does not exist
+- `200 OK`: Accepted route
+- `404 Not Found`: Route does not exist
 
 
 ## 📁 Project Structure
