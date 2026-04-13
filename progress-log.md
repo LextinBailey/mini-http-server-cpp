@@ -14,3 +14,7 @@ A day-by-day log of development decisions, features, and design evolution.
     - accept connection
 - Read raw HTTP request bytes
 - Print them to the terminal
+
+## Day 2 (Apr 13, 2026):
+
+- Updated `README.md`
