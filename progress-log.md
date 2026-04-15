@@ -15,7 +15,7 @@ A day-by-day log of development decisions, features, and design evolution.
 - Read raw HTTP request bytes
 - Print them to the terminal
 
-## Day 2 (Apr 13, 2026): Respond, Parsing, Routing, Status Code, Multiple Requests, Basic Multithreading
+## Day 2 (Apr 13, 2026): Respond, Parsing, Routing, Status Code, Basic Multithreading
 
 - Updated `README.md`
 - Responded with a simple message: "Hello, World!"
@@ -23,7 +23,13 @@ A day-by-day log of development decisions, features, and design evolution.
 - Finds the path
 - Sends different bodies based on the path
 - Sends appropriate status code
-- Added support for multiple requests
+- Added support for multiple clients
 - Basic multithreading
     - Thread-per-connection
     - Downsides of unbounded thread creation and resource overhead
+
+## Day 3 (Apr 14, 2026): Polished README
+
+- `README.md` now demonstrates usage
+
+

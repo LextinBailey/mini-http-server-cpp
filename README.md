@@ -1,16 +1,29 @@
 # Mini HTTP Server (C++)
 
-A mini HTTP server built from scratch using C++ and low-level sockets.
+A mini HTTP server built from scratch using C++ and low-level POSIX sockets.
+
+## 📝 Overview
+
+Mini HTTP Server (C++) is a lightweight HTTP server built from scratch using low-level POSIX sockets. It handles TCP connections, parses HTTP requests, implements basic routing, and responds with properly formatted HTTP responses.
+
+## ⚡️ Quick Example
+
+```bash
+$ curl localhost:8080/hello
+```
+```bash
+Hello, World!
+```
 
 ## 🔥 Features
 
 ### 🛠️ Core Features
 
 - [x] Accept TCP connections
-- [x] Parse basic HTTP requests
-- [x] Return simple HTTP responses
-- [x] Handles routes
-- [x] Handle multiple requests
+- [x] Parse HTTP request line (method, path, version)
+- [x] Basic routing system (`/`, `/hello`)
+- [x] Return valid HTTP responses with status codes
+- [x] Handle multiple clients (thread-per-connection)
 - [x] Basic multithreading
 
 ### 👨‍💻 Developer Experience
@@ -19,9 +32,47 @@ A mini HTTP server built from scratch using C++ and low-level sockets.
 
 ### 🧱 Planned
 
-- [ ] Basic routing system (`/users`, `/about`)
+- [ ] Upgrade routing system (`/users`, `/about`)
 - [ ] Serve static files
 - [ ] Logging requests
+
+## 💡 What This Demonstrates
+
+This project demonstrates:
+- Networking (sockets)
+- Request parsing
+- Response formatting (simple HTTP)
+- Ability to handle multiple concerns (routing, parsing, responding)
+- File I/O
+
+## ⚙️ Build and Usage
+
+### Requirements
+
+C++17 or later
+
+### Build with CMake
+
+```bash
+$ mkdir build
+$ cd build
+$ cmake ..
+$ cmake --build .
+```
+
+### Start the Server
+
+```bash
+$ ./server
+```
+
+### Testing the Server
+
+```bash
+$ curl localhost:8080/
+$ curl localhost:8080/hello
+$ curl localhost:8080/invalid
+```
 
 ## ⚙️ How It Works Internally
 
@@ -79,7 +130,7 @@ When a client connects:
 - Client handed off to a thread that calls `handle_client`
 - Main thread accepts more clients
 
-detach() lets the thread run independently.
+Threads are detached to allow independent execution without blocking the main thread.
 
 🔄 Tradeoffs of thread-per-connection:
 - ✅ Benefits:
@@ -88,6 +139,15 @@ detach() lets the thread run independently.
 - ❌ Downsides:
     - No control over lifetime
     - Potential resource exhaustion
+
+Future improvement: Replace thread-per-connection with a thread pool or event-driven model for better scalability.
+
+### Example Request
+
+```bash
+GET /hello HTTP/1.1
+Host: localhost:8080
+```
 
 ## 📁 Project Structure
 
@@ -101,10 +161,6 @@ mini-http-server-cpp/
 ├── progress-log.md
 └── README.md
 ```
-
-## 🚧 Status
-
-Under construction...
 
 ## 📈 Development Notes
 
