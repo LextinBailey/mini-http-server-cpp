@@ -25,6 +25,7 @@ Hello, World!
 - [x] Return valid HTTP responses with status codes
 - [x] Handle multiple clients (thread-per-connection)
 - [x] Basic multithreading
+- [x] Thread-safe logging
 
 ### 👨‍💻 Developer Experience
 
@@ -34,7 +35,6 @@ Hello, World!
 
 - [ ] Upgrade routing system (`/users`, `/about`)
 - [ ] Serve static files
-- [ ] Logging requests
 
 ## 💡 What This Demonstrates
 
@@ -141,6 +141,26 @@ Threads are detached to allow independent execution without blocking the main th
     - Potential resource exhaustion
 
 Future improvement: Replace thread-per-connection with a thread pool or event-driven model for better scalability.
+
+### 9. Thread-safe Logging
+
+`log()` wraps logging output with a global mutex.
+
+Protects multiple threads sharing `stdout` from race conditions.
+
+Each thread must wait to acquire the lock before logging.
+
+Logged:
+- Thread ID
+- Method
+- Path
+- Status
+
+Example:
+
+```bash
+[Thread 0x16b7eb000] GET / -> 200 OK
+```
 
 ### Example Request
 

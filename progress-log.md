@@ -32,4 +32,9 @@ A day-by-day log of development decisions, features, and design evolution.
 
 - `README.md` now demonstrates usage
 
+## Day 4 (Apr 16, 2026): Accept Fix, Thread-safe logging
+
+- Fixed accept ordering
+- Added thread-safe logging
+
 
