@@ -50,9 +50,18 @@ bool checkFile(const std::string& path, const std::string& base, std::string& bo
 
 void handle_client(int client_fd) {
     char buffer[1024] = {0};
-    read(client_fd, buffer, 1024);
+    ssize_t bytes_read = read(client_fd, buffer, 1024);
 
-    std::string request(buffer);
+    if (bytes_read < 0) {
+        log("ERROR", "read() failed", "400 Bad Request");
+        close(client_fd);
+        return;
+    } else if (bytes_read == 0) {
+        close(client_fd);
+        return;
+    }
+
+    std::string request(buffer, bytes_read);
 
     std::string first_line = request.substr(0, request.find("\r\n"));
 

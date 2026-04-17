@@ -41,12 +41,14 @@ A day-by-day log of development decisions, features, and design evolution.
     - Tester `public/index.html`
     - Aware of directory traversal vulnerabilities (future improvement)
 
-## Day 5 (Apr 17, 2026): Refactor Design, Content-Length
+## Day 5 (Apr 17, 2026): Refactor Design, Content-Length, Read Failure Check
 
 - Refactored design to separate concerns between routes and files
     - Routes handled with `path`
     - Files handled with `effective_path`
 - Added `Content-Length` in the HTTP response
     - Tells the client exactly how many bytes are in the response body
+- Handled `read()` failure by logging an error and closing the connection
+    - Was previously assuming read succeeded, full request arrived, and the buffer was valid
 
 
