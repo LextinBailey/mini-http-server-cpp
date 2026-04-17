@@ -84,11 +84,15 @@ void handle_client(int client_fd) {
         body = "404 Not Found";
     }
 
+    size_t content_length = body.size();
+
     std::string response = "HTTP/1.1 ";
     response += status;
     response += "\r\n";
     response += "Content-Type: ";
     response += content_type + "\r\n";
+    response += "Content-Length: ";
+    response += std::to_string(content_length) + "\r\n";
     response += "\r\n";
     response += body;
     

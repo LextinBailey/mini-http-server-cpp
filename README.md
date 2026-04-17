@@ -35,7 +35,6 @@ Hello, World!
 ### 🧱 Planned
 
 - [ ] Upgrade routing system (`/users`, `/about`)
-- [ ] Add content-length
 
 ## 💡 What This Demonstrates
 
