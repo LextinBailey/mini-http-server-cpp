@@ -66,7 +66,14 @@ void handle_http(int client_fd) {
 
     std::string request(buffer, bytes_read);
 
-    std::string first_line = request.substr(0, request.find("\r\n"));
+    size_t pos = request.find("\r\n");
+
+    if (pos == std::string::npos) {
+        close(client_fd);
+        return;
+    }
+
+    std::string first_line = request.substr(0, pos);
 
     size_t first_space = first_line.find(" ");
     size_t second_space = first_line.find(" ", first_space + 1);
@@ -108,7 +115,7 @@ void handle_http(int client_fd) {
     response += "\r\n";
     response += body;
     
-    write(client_fd, response.c_str(), response.size());
+    ssize_t bytes_written = write(client_fd, response.c_str(), response.size());
 
     log(method, path, status);
 

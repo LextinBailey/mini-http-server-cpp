@@ -41,7 +41,7 @@ A day-by-day log of development decisions, features, and design evolution.
     - Tester `public/index.html`
     - Aware of directory traversal vulnerabilities (future improvement)
 
-## Day 5 (Apr 17, 2026): Refactor Design, Content-Length, Read Failure Check, Restructured Design
+## Day 5 (Apr 17, 2026): Refactor Design, Content-Length, Read Failure Check, Restructured Design, Malformed Request Handling
 
 - Refactored design to separate concerns between routes and files
     - Routes handled with `path`
@@ -54,5 +54,6 @@ A day-by-day log of development decisions, features, and design evolution.
     - `main.cpp` = entry
     - `server.cpp` = networking only
     - `http.cpp` = HTTP logic only
+- Guarded against if `\r\n` isn't found
 
 
