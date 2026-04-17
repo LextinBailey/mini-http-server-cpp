@@ -1,3 +1,4 @@
+#include <fstream>
 #include <iostream>
 #include <mutex>
 #include <netinet/in.h>
@@ -12,6 +13,39 @@ void log(const std::string& method, const std::string& path, const std::string& 
     std::lock_guard<std::mutex> guard(m);
 
     std::cout << "[Thread " << std::this_thread::get_id() << "] " << method << ' ' << path << " -> " << status << '\n';
+}
+
+bool checkFile(const std::string& path, const std::string& base, std::string& body, std::string& content_type) {
+    if (!path.empty()) {
+            std::string file_path = path;
+            file_path.erase(0, 1);
+            file_path.insert(0, base);
+            
+            std::ifstream file(file_path);
+
+            if (file.is_open()) {
+                size_t lastPos = file_path.find_last_of('.');
+
+                if (lastPos != std::string::npos) {
+                    std::string content_check = file_path.substr(lastPos + 1);
+
+                    if (content_check == "html") content_type = "text/html";
+                    else if (content_check == "css") content_type = "text/css";
+                }
+
+                std::string line;
+
+                while (std::getline(file, line)) {
+                    body += line + "\r\n";
+                }
+
+                file.close();
+
+                return true;
+            }
+    }
+
+    return false;
 }
 
 void handle_client(int client_fd) {
@@ -30,6 +64,9 @@ void handle_client(int client_fd) {
 
     std::string status;
     std::string body;
+    std::string content_type = "text/plain";
+
+    std::string base = "../public/";
 
     if (path == "/") {
         status = "200 OK";
@@ -37,6 +74,8 @@ void handle_client(int client_fd) {
     } else if (path == "/hello") {
         status = "200 OK";
         body = "Hello, World!";
+    } else if (checkFile(path, base, body, content_type)) {
+        status = "200 OK";
     } else {
         status = "404 Not Found";
         body = "404 Not Found";
@@ -45,7 +84,8 @@ void handle_client(int client_fd) {
     std::string response = "HTTP/1.1 ";
     response += status;
     response += "\r\n";
-    response += "Content-Type: text/plain\r\n";
+    response += "Content-Type: ";
+    response += content_type + "\r\n";
     response += "\r\n";
     response += body;
     

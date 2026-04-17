@@ -32,9 +32,13 @@ A day-by-day log of development decisions, features, and design evolution.
 
 - `README.md` now demonstrates usage
 
-## Day 4 (Apr 16, 2026): Accept Fix, Thread-safe logging
+## Day 4 (Apr 16, 2026): Accept Fix, Thread-safe Logging, Serve Static Files
 
 - Fixed accept ordering
 - Added thread-safe logging
+    - Prevents race conditions
+- Added static file serving
+    - Tester `public/index.html`
+    - Aware of directory traversal vulnerabilities (future improvement)
 
 

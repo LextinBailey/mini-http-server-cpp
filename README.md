@@ -26,6 +26,7 @@ Hello, World!
 - [x] Handle multiple clients (thread-per-connection)
 - [x] Basic multithreading
 - [x] Thread-safe logging
+- [x] Serve static files
 
 ### 👨‍💻 Developer Experience
 
@@ -34,7 +35,7 @@ Hello, World!
 ### 🧱 Planned
 
 - [ ] Upgrade routing system (`/users`, `/about`)
-- [ ] Serve static files
+- [ ] Add content-length
 
 ## 💡 What This Demonstrates
 
@@ -120,7 +121,7 @@ Store the data in a buffer.
 
 Find the path in the data and respond accordingly.
 
-- `200 OK`: Accepted route
+- `200`: Accepted route
 - `404 Not Found`: Route does not exist
 
 ### 8. Multithreading
@@ -160,6 +161,30 @@ Example:
 
 ```bash
 [Thread 0x16b7eb000] GET / -> 200 OK
+```
+
+### 10. Serving Static Files
+
+`checkFile()` interprets file paths, opens the file, reads its contents, and returns it as the HTTP response body with the correct Content-Type.
+
+Example:
+
+```bash
+$ curl localhost:8080/index.html
+```
+
+```bash
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Title</title>
+</head>
+<body>
+    <h1>Test</h1>
+    <p>This is a paragraph of text.</p>
+</body>
+</html>
 ```
 
 ### Example Request
