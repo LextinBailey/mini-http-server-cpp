@@ -199,6 +199,8 @@ Host: localhost:8080
 ```
 mini-http-server-cpp/
 ├── CMakeLists.txt
+├── public/
+│   └── index.html
 ├── examples/
 ├── include/
 ├── src/

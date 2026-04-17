@@ -41,4 +41,10 @@ A day-by-day log of development decisions, features, and design evolution.
     - Tester `public/index.html`
     - Aware of directory traversal vulnerabilities (future improvement)
 
+## Day 5 (Apr 17, 2026): Refactor Design
+
+- Refactored design to separate concerns between routes and files
+    - Routes handled with `path`
+    - Files handled with `effective_path`
+
 

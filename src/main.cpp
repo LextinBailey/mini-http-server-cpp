@@ -68,13 +68,16 @@ void handle_client(int client_fd) {
 
     std::string base = "../public/";
 
+    std::string effective_path = path;
+
     if (path == "/") {
-        status = "200 OK";
-        body = "Welcome!";
-    } else if (path == "/hello") {
+        effective_path = "/index.html";
+    }
+
+    if (path == "/hello") {
         status = "200 OK";
         body = "Hello, World!";
-    } else if (checkFile(path, base, body, content_type)) {
+    } else if (checkFile(effective_path, base, body, content_type)) {
         status = "200 OK";
     } else {
         status = "404 Not Found";
