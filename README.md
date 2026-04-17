@@ -74,6 +74,11 @@ $ curl localhost:8080/hello
 $ curl localhost:8080/invalid
 ```
 
+## 🧠 Design Highlights
+
+- Clear separation between entry (`main.cpp`), networking (`server.cpp`), and HTTP logic (`http.cpp`)
+- `log()` and `check_file()` encapsulated inside anonymous namespace
+
 ## ⚙️ How It Works Internally
 
 ⚠️ This section is optional and provides a deeper look into the internal design.
@@ -164,7 +169,7 @@ Example:
 
 ### 10. Serving Static Files
 
-`checkFile()` interprets file paths, opens the file, reads its contents, and returns it as the HTTP response body with the correct Content-Type.
+`check_file()` interprets file paths, opens the file, reads its contents, and returns it as the HTTP response body with the correct Content-Type.
 
 Example:
 
@@ -200,10 +205,13 @@ mini-http-server-cpp/
 ├── CMakeLists.txt
 ├── public/
 │   └── index.html
-├── examples/
 ├── include/
-├── src/
-│   └── main.cpp
+│   ├── http.h
+│   └── server.h
+├── src
+│   ├── http.cpp
+│   ├── main.cpp
+│   └── server.cpp
 ├── progress-log.md
 └── README.md
 ```

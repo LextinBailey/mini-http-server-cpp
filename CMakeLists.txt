@@ -3,4 +3,6 @@ project(mini_http_server)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(server src/main.cpp)
+add_executable(server src/main.cpp src/server.cpp src/http.cpp)
+
+target_include_directories(server PRIVATE include)
