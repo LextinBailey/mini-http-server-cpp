@@ -6,13 +6,31 @@ A mini HTTP server built from scratch using C++ and low-level POSIX sockets.
 
 Mini HTTP Server (C++) is a lightweight HTTP server built from scratch using low-level POSIX sockets. It handles TCP connections, parses HTTP requests, implements basic routing, and responds with properly formatted HTTP responses.
 
+This project was built to deepen my understanding of how web servers work under the hood, including networking, HTTP parsing, and concurrency.
+
 ## ⚡️ Quick Example
 
 ```bash
-$ curl localhost:8080/hello
+$ curl -i localhost:8080/index.html
 ```
+
 ```bash
-Hello, World!
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 197
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Title</title>
+</head>
+<body>
+    <h1>Test</h1>
+    <p>This is a paragraph of text.</p>
+</body>
+</html>
+
 ```
 
 ## 🔥 Features
@@ -23,8 +41,7 @@ Hello, World!
 - [x] Parse HTTP request line (method, path, version)
 - [x] Basic routing system (`/`, `/hello`)
 - [x] Return valid HTTP responses with status codes
-- [x] Handle multiple clients (thread-per-connection)
-- [x] Basic multithreading
+- [x] Handle multiple clients (thread-per-connection, basic multithreading)
 - [x] Thread-safe logging
 - [x] Serve static files
 
@@ -32,9 +49,10 @@ Hello, World!
 
 - [x] Error messages for failed TCP connections
 
-### 🧱 Planned
+## 🧠 Design Highlights
 
-- [ ] Upgrade routing system (`/users`, `/about`)
+- Clear separation between entry (`main.cpp`), networking (`server.cpp`), and HTTP logic (`http.cpp`)
+- `log()` and `check_file()` encapsulated inside anonymous namespace
 
 ## 💡 What This Demonstrates
 
@@ -72,12 +90,9 @@ $ ./server
 $ curl localhost:8080/
 $ curl localhost:8080/hello
 $ curl localhost:8080/invalid
+$ curl localhost:8080/index.html
+$ curl localhost:8080/style.css
 ```
-
-## 🧠 Design Highlights
-
-- Clear separation between entry (`main.cpp`), networking (`server.cpp`), and HTTP logic (`http.cpp`)
-- `log()` and `check_file()` encapsulated inside anonymous namespace
 
 ## ⚙️ How It Works Internally
 
@@ -174,21 +189,14 @@ Example:
 Example:
 
 ```bash
-$ curl localhost:8080/index.html
+$ curl localhost:8080/style.css
 ```
 
 ```bash
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Test Title</title>
-</head>
-<body>
-    <h1>Test</h1>
-    <p>This is a paragraph of text.</p>
-</body>
-</html>
+h1 {
+  color: blue;        
+  font-size: 24px; 
+}
 ```
 
 ### Example Request
@@ -204,6 +212,7 @@ Host: localhost:8080
 mini-http-server-cpp/
 ├── CMakeLists.txt
 ├── public/
+│   ├── style.css
 │   └── index.html
 ├── include/
 │   ├── http.h
@@ -219,3 +228,22 @@ mini-http-server-cpp/
 ## 📈 Development Notes
 
 Progress and development insights are tracked in `progress-log.md`.
+
+## 🔮 Planned Improvements 
+
+### 🧱 Features
+
+- [ ] Upgrade routing system (`/users`, `/about`) (`std::unordered_map<std::string, handler>`)
+- [ ] Shared mutex compared to current global
+- [ ] Thread pool or event-driven model
+
+### ⚠️ Concerns to Handle
+
+- [ ] Vulnerable directory traversal (`curl localhost:8080/../../etc/passwd`)
+- [ ] Partial writes
+
+## 🚨 Limitations
+
+- Only supports basic HTTP (GET requests)
+- Does not fully implement HTTP specification
+- Thread-per-connection model is not scalable

@@ -19,7 +19,7 @@ A day-by-day log of development decisions, features, and design evolution.
 
 - Updated `README.md`
 - Responded with a simple message: "Hello, World!"
-- Parses the HTTP request
+- Parsed the HTTP request
 - Finds the path
 - Sends different bodies based on the path
 - Sends appropriate status code
@@ -30,7 +30,9 @@ A day-by-day log of development decisions, features, and design evolution.
 
 ## Day 3 (Apr 14, 2026): Polished README
 
-- `README.md` now demonstrates usage
+- Improved project documentation clarity
+- Added usage examples with curl
+- Structured README for readability and quick understanding
 
 ## Day 4 (Apr 16, 2026): Accept Fix, Thread-safe Logging, Serve Static Files
 
@@ -38,10 +40,10 @@ A day-by-day log of development decisions, features, and design evolution.
 - Added thread-safe logging
     - Prevents race conditions
 - Added static file serving
-    - Tester `public/index.html`
+    - Tested with `public/index.html`
     - Aware of directory traversal vulnerabilities (future improvement)
 
-## Day 5 (Apr 17, 2026): Refactor Design, Content-Length, Read Failure Check, Restructured Design, Malformed Request Handling
+## Day 5 (Apr 17, 2026): Refactor Design, Content-Length, Read Failure Check, Restructured Design, Malformed Request Handling, README Cleanup
 
 - Refactored design to separate concerns between routes and files
     - Routes handled with `path`
@@ -55,5 +57,10 @@ A day-by-day log of development decisions, features, and design evolution.
     - `server.cpp` = networking only
     - `http.cpp` = HTTP logic only
 - Guarded against if `\r\n` isn't found
+- Updated all new changes to `README.md`
+
+## 📌 Summary
+
+This project evolved from a basic TCP server into a simple HTTP server capable of handling routing, static files, and multiple clients.
 
 
