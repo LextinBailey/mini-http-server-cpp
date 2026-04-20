@@ -217,7 +217,7 @@ mini-http-server-cpp/
 ├── include/
 │   ├── http.h
 │   └── server.h
-├── src
+├── src/
 │   ├── http.cpp
 │   ├── main.cpp
 │   └── server.cpp
